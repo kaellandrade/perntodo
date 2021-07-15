@@ -36,12 +36,13 @@ app.get("/todos", async (_, res) => {
         const allTodos = await pool.query("SELECT * FROM todo;");
         res.json(allTodos.rows);
     } catch (error) {
+        res.json(error);
         console.error(error.message);
     }
 });
 /**
  *  GET A TODO
- * retornar um todo específico;
+ * retornar uma tarefa específico;
  */
 app.get("/todos/:id", async (req, res) => {
     try {
