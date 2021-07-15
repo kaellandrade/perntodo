@@ -15,14 +15,14 @@ const InputTodo = props => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)
             });
-            console.log(response);
+            window.location = '/';
         } catch (error) {
             console.error(error.message);
         }
     }
     return (
         <Fragment>
-            <h1 className='text-center mt-5'>Input Todo</h1>
+            <h1 className='text-center'>Input Todo</h1>
             <form className="d-flex mt-5" onSubmit={onSubmitForm}>
                 <input type="text" className='form-control'
                     onChange={e => setDescription(e.target.value)}
