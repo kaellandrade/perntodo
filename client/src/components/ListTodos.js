@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-const URL = 'http://localhost:5000/todos';
+import EditTodo from './EditTodo';
+const URL = 'http://10.0.0.113:5000/todos';
 
 const dateRegx = /(\d{4})-(\d{1,2})-(\d{1,2})/
 
@@ -10,15 +11,16 @@ const renderRows = (todos, deleteTodos) => {
 
     return (
         todos.map((todo, index) => {
-            const { description,todo_id } = todo;
-            const [_, year, month, day] = todo.criadoem.match(dateRegx);
-            
+            const { description, todo_id } = todo;
+            console.log(todo.criadoem);
+            const [, year, month, day] = todo.criadoem.match(dateRegx);
+
             return (
                 <tr key={todo_id}>
-                    <th scope="row">{index+1}</th>
+                    <th scope="row">{index + 1}</th>
                     <td>{description}</td>
                     <td>{`${day}-${month}-${year}`}</td>
-                    <td> <button onClick={_ => { console.log(todo_id) }} className='btn btn-warning'>Edit</button> </td>
+                    <td> <EditTodo todo={todo} /> </td>
                     <td> <button onClick={_ => { deleteTodos(todo_id) }} className='btn btn-danger'>Delete</button> </td>
                 </tr>
             )
@@ -42,7 +44,7 @@ const ListTodos = props => {
                 headers: { 'Content-Type': 'aplication/json' }
             });
             const jsonData = await response.json();
-            // console.log(jsonData);
+            console.log(jsonData);
             getTodo();
         } catch (error) {
             console.error(error.message);

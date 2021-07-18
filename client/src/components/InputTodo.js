@@ -10,11 +10,12 @@ const InputTodo = props => {
         e.preventDefault(); // Evita o comportamento padrão do objeto
         try {
             const body = { description };
-            const response = await fetch("http://localhost:5000/todos", {
+            const response = await fetch("http://10.0.0.113:5000/todos", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)
             });
+            console.log(response);
             window.location = '/';
         } catch (error) {
             console.error(error.message);
